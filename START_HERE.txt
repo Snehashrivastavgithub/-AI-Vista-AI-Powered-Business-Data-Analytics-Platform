@@ -1,0 +1,94 @@
+AI VISTA — START HERE
+=====================
+
+A complete Django + MySQL business analytics application.
+
+WHAT YOU NEED
+-------------
+- Windows 10/11
+- Python 3.11 (64-bit)
+- MySQL Server 8.0 installed at:
+  C:\Program Files\MySQL\MySQL Server 8.0
+- Visual Studio Code (recommended)
+
+FIRST-TIME SETUP (run once)
+---------------------------
+Double-click:
+
+    scripts\setup.cmd
+
+This creates .venv, installs dependencies, starts the dedicated MySQL
+instance on port 3307, creates the ai_vista database, runs migrations and
+seeds the demo workspace.
+
+If PowerShell blocks scripts, the .cmd wrappers use ExecutionPolicy Bypass.
+
+START THE APP
+-------------
+Double-click:
+
+    scripts\run.cmd
+
+Then open:
+
+    http://127.0.0.1:8000/
+
+DEMO LOGINS
+-----------
+    User / analyst : demo  / Demo@12345
+    Administrator  : admin / Admin@12345
+
+VS CODE — MANUAL METHOD
+-----------------------
+1. Open this folder in VS Code.
+2. Select interpreter: .venv\Scripts\python.exe
+3. Open Terminal and run:
+
+       .\.venv\Scripts\python.exe manage.py migrate
+       .\.venv\Scripts\python.exe manage.py seed_demo
+       .\.venv\Scripts\python.exe manage.py runserver
+
+4. Open http://127.0.0.1:8000/
+
+USING YOUR OWN MYSQL SERVER
+---------------------------
+Copy .env.example to .env and change:
+
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_NAME=ai_vista
+    DB_USER=ai_vista
+    DB_PASSWORD=your_password
+
+Then run:
+
+    .\.venv\Scripts\python.exe manage.py migrate
+
+DATABASE NOTE
+-------------
+The original MySQL service on port 3306 did not accept the supplied root
+passwords, so this project uses a dedicated MySQL 8 instance on port 3307.
+It does not modify the existing MySQL service or its data.
+
+The database files live outside this folder at:
+
+    %LOCALAPPDATA%\ai_vista_mysql\data
+
+See README.md for the full feature list, architecture, security notes,
+testing commands and production checklist.
+
+Important limitations (honest):
+- Scanned PDF OCR needs the Tesseract binary installed separately.
+- The AI assistant is a deterministic, grounded analytics assistant,
+  not an external large-language model.
+- Very large datasets are analysed on a configurable sample (default 250k
+  rows) for memory safety. The full data remains stored.
+
+TROUBLESHOOTING
+---------------
+- MySQL connection refused: run scripts\start_mysql.cmd
+- Python not found: install Python 3.11 and enable "Add Python to PATH"
+- Port 8000 in use: run
+      .\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8001
+- Recreate demo data:
+      .\.venv\Scripts\python.exe manage.py seed_demo --reset
