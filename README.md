@@ -170,40 +170,7 @@ Additional samples are included in the archive:
 - `docs/sample_data/shopping_trends.csv` — the 3,900-row Shopping Trends dataset used for the revenue and PowerPoint demo.
 - `docs/sample_reports/Shopping_Trends_Revenue_Report.pptx` — a generated PowerPoint with revenue KPI cards, a revenue-by-category bar chart and a category-share pie chart.
 
-> Change the demo passwords before exposing the application outside your machine.
 
----
-
-## 6. MySQL configuration
-
-The default `.env` targets a **dedicated MySQL 8 instance on port 3307**, so it does not interfere with an existing MySQL service on 3306.
-
-```env
-DB_ENGINE=mysql
-DB_NAME=ai_vista
-DB_USER=ai_vista
-DB_PASSWORD=AiVista@2026
-DB_HOST=127.0.0.1
-DB_PORT=3307
-```
-
-The data directory lives outside the repository at:
-
-```
-%LOCALAPPDATA%\ai_vista_mysql\data
-```
-
-### Using your own MySQL server
-
-Edit `.env`:
-
-```env
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_NAME=ai_vista
-DB_USER=your_user
-DB_PASSWORD=your_password
-```
 
 Create the database and grant privileges (run as a MySQL administrator):
 
@@ -431,5 +398,6 @@ Reports record the source dataset, row count, method notes, generation timestamp
 
 Built as the AI VISTA mini-project implementation, following the product scope in the project synopsis while using the requested **Python/Django/MySQL** stack.
 
-**Author:** Sneha Shrivastava · Roll No. 57  
+**Author:** Sneha Shrivastava 
 **Project:** AI VISTA — Business Data Analytics & Automated Reporting System
+
